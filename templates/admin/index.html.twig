@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+
+
+{% block body %}
+
+
+<style>
+        .card {
+            background-color: beige;
+        }
+        
+        .btn-marron {
+            background-color: #A97448;
+            color: white;
+        }
+    </style>
+<div class="container">
+        <div class="text-center">
+            <h4 class="mb-4">Bienvenue sur votre Backoffice</h4>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <a href="{{ path('admin_produits') }}" class="btn btn-marron btn-block">Gestion des produits</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <a href="{{ path('admin_users') }}" class="btn btn-marron btn-block">Gestion des membres</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <a href="{{ path('admin_commandes') }}" class="btn btn-marron btn-block">Gestion des commandes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <a href="{{ path('admin_transporter') }}" class="btn btn-marron btn-block">Gestion des transporteurs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

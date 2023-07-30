@@ -1,0 +1,21 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+payment_stripe:
+    path: /stripe/payment
+    controller: App\Controller\PaymentController::payment
+order_create:
+    path: /order/create
+    controller: App\Controller\OrderController::paymentAction
+    methods: GET
+payment_success:
+    path: /payment/success
+    controller: App\Controller\PayController::successAction
+    methods: [GET]
+payment_cancel:
+    path: /payment/cancel
+    controller: App\Controller\PayController::cancelAction
+    methods: [GET]
+reset_password:
+    path: /reset_password
+    controller: App\Controller\ResetPasswordController::reset

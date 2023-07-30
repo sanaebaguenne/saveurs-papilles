@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container text-center">
+<h1 class="mb-4">
+    {% if editMode %}
+        Modification d'un transporter
+    {% else %}
+        Création un transporter 
+    {% endif %}
+</h1>
+</div>
+
+{# form() est une fonction twig permettant d'afficher un formulaire #}
+{# {{ form(formArticle) }} #}
+
+{{ form_start(formEdit, {
+    attr : {
+        'class': 'col-md-7 mx-auto'
+    }
+}) }}
+{# form_start() et form_end() permettent de délimiter un formulaire, de modifier ses champs, de changer la méthode du formulaire ...  #}
+
+{# form_row() permet de gérer l'affichage d'un champ et de son label #}
+{{ form_row(formEdit.title, { 'attr': {'placeholder': "Titre"} }) }}
+{{ form_row(formEdit.content, { 'attr': {'placeholder': "Description Technique", 'rows': 15} }) }}
+
+{{ form_row(formEdit.price) }}
+
+<div class="text-center">
+<button type="submit" class="btn btn- mt-2" style=" background-color: #A97448; color: #ffff;">
+    {% if editMode %}
+        Enregistrer les modifications ✅
+    {% else %}
+        Ajouter le produit ✅
+    {% endif %}
+</button>
+</div>
+
+{{ form_end(formEdit) }}
+
+{% endblock %}

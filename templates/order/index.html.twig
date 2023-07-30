@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de la commande{% endblock %}
+
+{% block body %}
+
+
+
+   
+{# <div>  {{ form_start(form) }} #}
+<h1 class="n2 pb-2">Détail de la commande</h1>
+{# <h3 class="fs-base fw-normal text-body text-uppercase pb-1 pb-sm-1">1.
+
+</h3> #}
+
+{# <p>Si vous n'avez pas d'adresse ajouter en une dans votre espace compte<a href="">Ajouter une adresse</a></p> #}
+
+{# <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3"><span class="text-decoration-underline ms-1">Choisir votre livraison
+</span></h3> #}
+{# {{ form_row(form.addresses)}} #}
+{# {{ form_row(form.address)}} #}
+{# <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3"><span class="text-decoration-underline ms-1">Mode de livraison
+</span></h3> #}
+{# </div> #}
+<div>
+{# <h2>Récapitulatif de la commande #}
+{# <span>({{ recapCart|length }} produits)</span></h2> #}
+{# </h2> #}
+</div>
+
+
+
+
+<div class="container">
+
+    {% for message in app.flashes('success') %}
+    <div class="text-center alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+    <div class="text-center alert alert-warning">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('info') %}
+    <div class="text-center alert alert-info">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-8">
+        {% if not app.user %}
+            <div class="container-fluid"
+                style="border: solid 1px rgba(117,117,117,0.3); margin-left: 10px; padding: 20px;">
+                <p style="color: rgb(250, 84, 0);font-size: 20px; margin-bottom: 0;">Livraison gratuite pour les
+                    membres.</p>
+                <p style="color: #757575;">Devenez Membre MyShop pour profiter de livraisons rapides et gratuites. <a
+                        href="">Rejoingnez-nous</a>
+                    ou <a href="">S'identifier</a></p>
+            </div>
+        {% endif %}
+            <div class="container-fluid">
+                <h4 class="mt-4">Panier</h4>
+                {% if items %}
+                <table class="table">
+                    {% for item in items %}
+                    <tr>
+                        <td><img src="{{ asset('images/produits/' ~ item.product.image) }}" alt="image du produit"
+                                style="width: 150px; height: 150px; object-fit: contain;"></td>
+                        <td><p class="mt-4"> {{ item.product.title }} <br>Chaussure pour
+                            {# {{ item.product.collection }}<br>{{ item.product.color}} <br>Taille / Pointure #}
+                           <br> Quantité &nbsp;&nbsp;&nbsp; {{ item.quantity }} <br><br>
+                            <a href="{{ path('cart_decrement', {id : item.product.id }) }}"
+                                class="btn btn-sm btn-success mb-3" style="width: 30px; height: 30px;">
+                                <i class="fas fa-minus"></i></a>
+                            <a href="{{ path('cart_add', {id : item.product.id }) }}" class="btn btn-sm btn-success mb-3"
+                                style="width: 30px; height: 30px;">
+                                <i class="fas fa-plus"></i></a>
+                            <a href="{{ path('cart_remove', {id : item.product.id }) }}" class="btn btn-sm btn-danger mb-3"
+                                style="width: 30px; height: 30px;">
+                                <i class="fa-regular fa-trash-can"></i></a></p>
+                        </td>
+                        <td>{{ item.product.price * item.quantity }} €</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <p>Il n'y a aucun article dans votre panier.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <h4 class="mb-4">Récapitulatif</h4>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p>Avez-vous un code promotionnel ?</p>
+                    </div>
+                    <div class="col-md-2">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p>Sous-total</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{ total }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p>Frais estimés de prise en charge et d'expédition</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>Gratuit</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row pt-3">
+                    <div class="col-md-10">
+                        <p>Total</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{{ total }} €</p>
+                    </div>
+                </div>
+                <hr>
+
+                {% if app.user %}
+                {# <a href="{{ path('payment_stripe') }}" class="btn btn-dark btn-large">Paiement</a> #}
+                {# <a href="{{ path('payment_stripe', { 'productId': product.id }) }}">Payer</a> #}
+                {# <a href="{{ path('app_order' }}">Payer</a> #}
+                {# <a href="{{ path('order_create') }}">Payer</a> #}
+
+
+                
+
+                {% else %}
+                <p>Veuillez vous <a href="{{ path('app_register') }}">inscrire</a> ou vous <a href="{{ path('app_login') }}">identifier</a> afin de pouvoir finaliser votre commande</p>
+                {% endif %}
+                
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+{# <h1>Paiement</h1> #}
+<p>Nom: {{ firstName }} {{ lastName }}</p>
+<p>Adresse de la livraison: {{ address }} {{codepostal}}<{{city}}/p>
+
+ <h1>Mode de livraison</h1>
+{% for item in transporters %}
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.content }}</p>
+    {# <p>Prix : {{ item.price }} €</p> #}
+{% endfor %}
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+{{ form_end(form) }} #}
+{# 
+{% if selectedTransporter %}
+    <p>Prix de livraison : {{ selectedTransporter.price }} €</p>
+    <p>Montant total de la facture : {{ selectedTransporter.price + 100 }} €</p> {# Remplacez 100 par le montant total des produits commandés #}
+{# {% endif %} #} 
+
+{% if app.user %}
+    <a href="{{ path('payment_stripe') }}" class="btn btn-dark btn-large">Paiement</a>
+{% else %}
+    <p>Veuillez vous <a href="{{ path('app_register') }}">inscrire</a> ou vous <a href="{{ path('app_login') }}">identifier</a> afin de pouvoir finaliser votre commande</p>
+{% endif %}
+
+
+
+{% endblock %}

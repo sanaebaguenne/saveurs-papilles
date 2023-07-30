@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<style>
+/* [class^="icon-Ico_"], [class*=" icon-Ico_"] {
+  font-family: 'Auros';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+
+h1 {
+  /* font-weight: bold; */
+}
+
+/* Style pour le prix */
+p.price {
+  font-weight: bold;
+}
+
+.add-to-cart.active {
+  background-color: #A97448;
+  color: white;
+}
+.add-to-cart {
+  border: 1px solid #A97448;
+  border-radius: 30px;
+  color: #A97448;
+  background-color: white;
+  width: 270px;
+  height: 39px;
+  border-color: #A97448;
+}
+
+/* Style lorsque le bouton est activé (cliqué) */
+.add-to-cart:hover {
+  background-color: #A97448;
+  color: white;
+   border-color: #A97448; /* Couleur de la bordure en marron */
+}
+
+</style>
+
+<div class="container">
+    <div class="row">
+   
+        <div class="col-md-6">
+        <img src="{{ asset('images/produits/' ~ produit.image) }}" alt="photo du produit"
+            style="height: 500px; object-fit: contain;">
+        </div>
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h1 class="mt-4" ></h1><span>{{ produit.title }}</span>
+                    <p>{{ produit.descriptionShort}} </p>
+                    <p>{{ produit.price }} €</p> 
+                    <a href="{{ path('cart_add', {id: produit.id}) }}" class="btn btn- btn-sm add-to-cart" onclick="this.classList.add('active')">Ajouter au panier</a>
+                    <br><br>
+                    
+                   <!-- Lien pour afficher/masquer la description -->
+                        <a href="#description" class="btn btn- btn-sm add-to-cart toggle-btn">DESCRIPTION +</a>
+                        <div id="description" style="display: none;">
+                        <p>{{ produit.content }}</p>
+                        </div>
+
+                        <!-- Lien pour afficher/masquer les ingrédients et allergènes -->
+                        <a href="#ingredients" class="btn btn- btn-sm add-to-cart toggle-btn">INGREDIENTS ET ALLERGENES +</a>
+                        <div id="ingredients" style="display: none;">
+                        <p>{{ produit.ingredient }}</p>
+                        </div>
+
+                        
+
+                    
+                
+                        
+
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+  // Récupérer tous les éléments avec la classe "toggle-btn"
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+  // Ajouter un gestionnaire d'événement à chaque bouton
+  toggleButtons.forEach((button) => {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      // Récupérer l'ID de la section cible à partir de l'attribut "href" du bouton
+      const targetId = this.getAttribute('href');
+
+      // Récupérer l'élément de la section cible
+      const targetElement = document.querySelector(targetId);
+
+      // Changer l'affichage de la section cible (afficher ou masquer)
+      if (targetElement.style.display === 'none') {
+        targetElement.style.display = 'block';
+        this.innerText = this.innerText.replace('+', '-'); // Remplacer le signe "+"
+      } else {
+        targetElement.style.display = 'none';
+        this.innerText = this.innerText.replace('-', '+'); // Remplacer le signe "-"
+      }
+    });
+  });
+</script>
+
+
+
+
+
+{% endblock %}

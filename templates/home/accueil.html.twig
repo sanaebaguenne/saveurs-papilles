@@ -1,0 +1,360 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil {% endblock %}
+
+{% block body %}
+   <style>
+    .card-img-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .card-img-top {
+    width: 100%;
+    height: auto;/* Ajoutez une hauteur fixe pour la card-img-top */
+    background-image: url("{{ asset('images/slide/visuel-banner-page-maison-2.jpg') }}");
+    background-size: cover;
+    background-position: center top; /* Changer cette valeur pour ajuster la position de l'image */
+    object-fit: cover;
+  }
+    
+
+    .image-overlay {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        height:310px;
+        width:400px;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background-color: #f6f1eb;
+        padding: 10px;
+        color: black;
+        z-index: 2;
+        pointer-events: none;
+        font-size: 14px
+    }
+
+    .first-section{
+        margin-bottom: 70px;
+    }
+    .second-section{
+          margin-bottom: 120px;
+          
+    }
+    
+
+     
+     .custom-section {
+        max-width: 1000px; /* Changer la largeur selon tes besoins */
+        margin: 0 auto; /* Centrer le contenu horizontalement */
+      }  
+
+     
+
+    .custom-section h3 {
+        font-family: 'Arial', sans-serif; /* Changer la police selon tes préférences */
+        font-size: 24px; /* Changer la taille de la police selon tes préférences */
+        text-align: center;
+    }
+
+    .custom-section p {
+        font-family: 'Arial', sans-serif; /* Changer la police selon tes préférences */
+        font-size: 16px; /* Changer la taille de la police selon tes préférences */
+        text-align: justify;
+    }
+
+    /* styles.css (ou tout autre fichier CSS que vous utilisez) */
+
+ .logo-section {
+        display: flex;
+        background-color:  #ddebec;
+        padding: 8px;
+        align-items: center;
+        justify-content: center;
+        margin-top: -70px;
+        margin-bottom: 120px;
+        height: 150px;
+    }
+
+    .logo-container {
+        margin-right: 20px;
+    }
+
+    /* Pour éviter l'overlay descendant sur le logo-container */
+  .image-container {
+    position: relative;
+    margin: 20px;
+    overflow: hidden; /* Ajoutez cette ligne pour cacher le contenu dépassant de l'image-container */
+  }
+
+.logo-title {
+    margin-left: 10px; /* Espacement entre le logo et le titre */
+}
+
+.imgcake{
+    width: 1000px;
+    height:500px ;
+    object-fit: cover;
+    margin-top: 50px;
+    transition: opacity 0.5s, opacity 0.5s;
+}
+
+.imgcake:hover {
+    opacity: 0.8;
+     transform: translateX(10px);
+}
+
+/* styles.css (ou tout autre fichier CSS que vous utilisez) */
+
+.first-section2 {
+    /* Styles pour la première section avec l'image principale */
+    background-image: url("images/boutique/fond_bloc_produits.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px; /* Ajoutez une marge intérieure pour un meilleur espacement du contenu */
+}
+
+.center-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container {
+    position: relative;
+    margin: 20px;
+}
+
+.image-container img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+ .image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #d5e6e8;
+    padding: 10px;
+    color: black;
+    z-index: 2;
+    pointer-events: none;
+    font-size: 14px;
+    /* Autres styles pour le texte de l'overlay */
+  }
+
+.image-container:hover .content-overlay {
+    opacity: 1; /* Opacité augmentée lors du survol pour l'effet de fondu */
+}
+
+.image-title,
+.image-description {
+    color: #fff; /* Couleur du texte */
+    text-align: center;
+    margin: 10px;
+}
+p{
+    padding: 20px;
+    text-align: center;
+
+}
+h3{ 
+       text-align: center;
+}
+/* For screens smaller than 768px */
+@media (max-width: 870px) {
+    .first-section2 {
+        padding: 20px; /* Reduce the padding for smaller screens */
+    }
+    
+    .center-section {
+        display: flex;
+        flex-direction: column; /* Stack the images vertically */
+        align-items: center; /* Center the images horizontally */
+    }
+    
+    .image-container {
+        margin: 20px;
+        max-width: 300px; /* Limit the width of the image container */
+    }
+    
+    .image-container img {
+        width: 100%; /* Image will take 100% of container width */
+        height: auto; /* Preserve aspect ratio */
+    }
+}
+
+/* For screens larger than 768px */
+@media (min-width: 768px) {
+    .center-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    
+    
+    .image-container {
+        width: 30%; /* Display the images side by side with some spacing */
+    }
+    
+    .image-container img {
+        width: 100%;
+        height: 400px; /* Set a fixed height for consistency */
+        object-fit: cover;
+    }
+
+    
+}
+
+@media (max-width: 500px) {
+        .image-overlay {
+      position: static; /* Enlever le positionnement absolu */
+      margin-top: 10px; /* Ajouter un espace entre l'image et l'overlay */
+      transform: none; /* Supprimer le transform */
+    }
+
+    }
+
+
+
+   
+</style>
+    
+
+{% for message in app.flashes('success') %}
+<div class="text-center alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
+
+  <section class="first-section">
+         <div class="card-img-container">
+
+            <img src="{{ asset('images/slide/visuel-banner-page-maison-2.jpg') }}" class="card-img-top" alt="visuel-banner", style="height: 500px " "">
+            <div class="image-overlay">
+                
+                <br><br><h1 class="card-title">SAVEURS & PAPILLES</h1>
+                <p class="card-title">La Maison Savuers & paplippes est depuis 2015<br>
+                     le rendez-vous incontesté des gourmands exigeants.<br>
+                    un pâtissier-chocolatier passionné et talentueux.<br>
+                    Tentez l'expérience Calderon, unique et addictive…</p>
+            </div>
+          </div>
+    </section>
+
+
+         {# <section class="first-section">
+    <div class="card-img-container">
+        <img src="{{ asset('images/slide/visuel-banner-page-maison-2.jpg') }}" class="card-img-top" alt="image du produit" style="width: 100%">
+        <div class="image-overlay">
+            {# <img src="{{ asset('images/logo/picto-cacao.svg') }}" class="logo" alt="logo" style="height: 80px";> #}
+            {# <h1 class="card-title">SAVEURS & PAPILLES</h1>
+            <p class="card-title" >La Maison Calderon est depuis 2005 <br>
+                le rendez-vous incontesté des gourmands exigeants. <br>
+                À sa tête, Christophe Calderon,<br>
+                un pâtissier-chocolatier passionné et talentueux.<br>
+                Tentez l'expérience Calderon, unique et addictive…</p>
+        </div>
+    </div>
+    </section> #}
+    {# <div class="logo-section">
+        <div class="logo-container">
+            <img src="{{ asset('images/logo/cupcake.png') }}" class="logo" alt="logo" style="width: 50px;"><br>
+            <p class="logo-title">FABRICATION  ARTISANALE</p>
+        </div>
+        <div class="logo-container">
+            <img src="{{ asset('images/logo/cacao.png') }}" class="logo" alt="logo" style="width: 50px; ba">
+            <p class="logo-title" >MATIERES  PREMIÈRES  D'EXCEPTION</p>
+        </div>
+        <div class="logo-container">
+            <img src="{{ asset('images/logo/vanilla.jpg') }}" class="logo" alt="logo" style="width: 50px;">
+            <p class="logo-title" >FABRIQUÉ  AVEC PASSION</6>
+        </div>
+    </div> #}
+
+
+    
+
+
+         
+
+
+<section class="second-section custom-section">
+    <div class="container">
+        <div class="row">
+        <h3>Nous vous proposons une gamme de produits pour vos événements sur commande </h3>
+        <img src="images/slide/cake.jpg" alt="" class="imgcake">
+        </div>
+    </div>
+</section>
+
+
+
+{# <img src="images/slide/image-du-chef.jpg" class="img-fluid" alt="Image"> #}
+
+
+
+<section class="first-section2">
+    <div class="card-img-container">
+        <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+            <div class="text-center">
+                <h3>Nos valeurs</h3>
+                <p>Passion, authenticité et créativité animent le quotidien de Christophe et Magali. Ils ont à cœur de créer des pâtisseries, des chocolats, des macarons et des confiseries à base de matières premières de haute qualité et de privilégier des saveurs locales.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="center-section">
+        <div class="image-container">
+            <img src="{{ asset('images/personnel/3-image-univers-macarons.png') }}" alt="Image 1">
+            <div class="content-overlay">
+                <h3 class="image-title">Titre de l'image 1</h3>
+                <p class="image-description">Description de l'image 1</p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="{{ asset('images/personnel/3-chocolat-image.png') }}" alt="Image 2">
+            <div class="content-overlay">
+                <h3 class="image-title">Titre de l'image 2</h3>
+                <p class="image-description">Description de l'image 2</p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="{{ asset('images/personnel/3-confiseries-image.jpg') }}" alt="Image 3">
+            <div class="content-overlay">
+                <h3 class="image-title">Titre de l'image 3</h3>
+                <p class="image-description">Description de l'image 3</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container-fluid mb-5 p-0">
+
+
+
+
+    
+
+
+
+
+
+</div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

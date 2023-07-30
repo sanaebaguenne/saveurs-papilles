@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Découvrez notre délicieuse sélection de pâtisseries artisanales. Commandez en ligne et savourez des gâteaux faits maison, frais et savoureux.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Pâtisserie Gourmande - Commandez vos délices en ligne">
+    <title>{% block title %}Votre Site de Pâtisserie |Saveurs & papilles{% endblock %}</title>
+   
+        <link rel="icon" href="{{ asset('images/logo/saveurspapilles.png')}}">
+
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+    <link rel="stylesheet" href="css/sty">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        
+
+        * {
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        th,
+        td {
+            vertical-align: middle;
+        }
+
+        .header_logo {
+            width: 54px;
+            height: 54px;
+        }
+        .btn-large {
+            width: 100%; 
+            padding: 15px; 
+            border-radius: 20px;
+        }
+        .navbar-brand {
+            width: 50px;
+            height:100px;
+        }
+        .header_logo{
+             width: 150px;
+            height:150px;
+           
+        }
+
+         .nav-link {
+            font-weight: 500;
+            font-size: 0.8em;
+            font-family: 'Futura', sans-serif;
+            text-transform: uppercase;
+        }
+
+        
+
+        .color{
+            background: #cb4335;
+        }
+        .navbar-collapse{
+
+            color:#cb4335
+
+        }
+     
+
+        .navbar-banner-social a {
+            color: #cb4335; /* Couleur des icônes sociales */
+        } */
+
+        .navbarhaut{
+            height:10px;
+            /* background:#ecf0f1; */
+            style="background-color: #F8F7F5;
+        }
+
+        .navbar-banner-logo {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.navbar-banner-logo img {
+    max-height: 100px; /* Ajustez la taille maximale du logo selon vos besoins */
+    max-width: 100%; /* Assurez-vous que le logo ne dépasse pas la largeur du conteneur */
+   
+}
+
+         .navbar-banner-social {
+            display: flex;
+            gap: 30px; /* Espacement entre les icônes sociales */
+         } 
+
+ p {
+            line-height: 1.9em;
+            font-size: 1.1em;
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            color: #000000;
+        }
+ h1, h3 {
+             text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #000;
+  font-family: 'Crimson Text', serif;
+  font-size: 22px;
+}
+        h5 {
+  font-family: 'quasimoda-light';
+  font-weight: 500;
+  font-size: 18px;
+  color: black;}
+
+         
+
+         th,
+        td {
+            vertical-align: middle;
+        }
+
+
+    </style>
+
+    <style>
+    /* Vous pouvez ajouter cette règle CSS dans votre fichier styles.css ou dans la balise <style> de votre page HTML */
+.bg-warning {
+  background-color: #ffc107; /* Couleur jaune */
+  color: #fff; /* Couleur du texte en blanc pour le contraste */
+  
+}
+
+.header_logo{
+    border-radius: 70px;
+}
+
+
+/* Style pour les liens de la barre de navigation */
+.nav-link {
+    color: #8b4513;
+    text-decoration: none; /* Supprime la soulignement par défaut des liens */
+    position: relative; /* Pour ajouter le trait en dessous */
+}
+
+/* Effet au survol de la souris */
+.nav-item-hover:hover .nav-link {
+    color: #your-desired-hover-color; /* Couleur du texte au survol */
+}
+
+/* Trait en dessous lors du survol */
+.nav-item-hover:hover .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Ajustez la valeur pour définir la distance entre le lien et le trait */
+    width: 100%;
+    height: 2px;
+    background-color: #your-desired-hover-color; /* Couleur du trait au survol */
+}
+
+    
+    </style>
+    {% endblock %}
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid mx-3">
+        <!-- Logo -->
+        <div class="navbar-brand-wrapper">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <img src="{{ asset('images/logo/saveurspapilles.png')}}" class="header_logo">
+            </a>
+        </div>
+
+        <!-- Bouton de menu pour les appareils de petite taille -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Éléments de la barre de navigation -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ path('app_admin') }}"style="color: #8b4513;"><i
+                                class="fa-solid fa-gears"></i>
+                            Administration</a>
+                    </li>
+                    {% endif %}
+                    {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ path('profil') }}"style="color: #8b4513;"><i
+                                class="fa-solid fa-user"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ path('app_logout') }}"style="color: #8b4513;"><i
+                                class="fa-solid fa-right-from-bracket"></i>
+                            Déconnexion</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ path('app_register') }}"style="color: #8b4513;">
+                            Nous rejoindre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ path('app_login') }}"style="color: #8b4513;">
+                            S'identifier</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+    <div class="d-inline-flex align-items-center">
+        <a class="nav-link position-relative" href="{{ path('app_cart') }}">
+            <i class="fa-solid fa-cart-shopping" style="color: #A97448;"></i>
+
+            {% set nbProduits = app.session.get('qt') %}
+
+            {% if nbProduits > 0 %}
+                <span class="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-warning">{{ nbProduits }}</span>
+            {% endif %}
+        </a>
+    </div>
+</li>
+
+                </ul>
+               
+            {# </div> #}
+        </div>
+    </nav>
+    
+    
+
+
+
+
+
+
+
+
+
+    <nav class="navbar navbar-expand-lg bs-body-bg">
+    <div class="container-fluid mx-3">
+        <a class="navbar-brand" href="{{ path('home') }}"></span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('home') }}">MAISON</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('accueil') }}">ACCUEIL</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('chocolats') }}">CHOCOLATS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('macarons') }}">MACARONS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('patisseries') }}">PATISSERIES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('gouters') }}">GOUTER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('confiseries') }}">CONFISERIES</a>
+                </li>
+
+                
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-item-hover" aria-current="page" href="{{ path('contact.index') }}" >CONTACT</a>
+                                    </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+ <hr>
+
+
+    <div class="container-fluid p-5" style="min-height: 90vh;">
+
+    {% include '_partials/_flash.html.twig' %}
+        {% block body %}
+
+        {% endblock %}
+    </div>
+   {% include '_partials/_footer.html.twig' %}
+
+    <footer class="container-fluid bg-dark text-center" style="height: 60px;">
+        <p style="padding: 18px; color: white;"><i class="fa-solid fa-location-dot"></i> &nbsp;&nbsp; France &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa-regular fa-copyright"></i> {{ "now" | date('Y') }} Tous droits reservés</p>
+    </footer>
+
+    {% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
+    
+
+    {% endblock %}
+</body>
+
+</html>

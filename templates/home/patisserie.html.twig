@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Patisserie
+{% endblock %}
+
+{% block body %}
+	<style>
+		.card-img-container {
+			position: relative;
+			display: inline-block;
+		}
+
+		.image-overlay {
+			position: absolute;
+			height: 310px;
+			width: 400px;
+			top: 100%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+			background-color: #efe7d6;
+			padding: 30px 45px;
+			color: black;
+			z-index: 2;
+			pointer-events: none;
+			font-size: 14px
+		}
+
+
+		.first-section {
+			margin-bottom: 250px; /* Ajoutez la valeur de marge souhaitée */
+		}
+		.second-section {
+			margin-top: 50px; /* Ajoutez la valeur de marge souhaitée */
+			margin-bottom: 50px;
+
+		}
+		.add-to-cart.active {
+			background-color: #A97448;
+			color: white;
+		}
+		.add-to-cart {
+			border: 1px solid #A97448;
+			border-radius: 30px;
+			color: #A97448;
+			background-color: white;
+			width: 180px;
+			height: 39px;
+		}
+
+		/* Style lorsque le bouton est activé (cliqué) */
+		.add-to-cart:hover {
+			background-color: #A97448;
+			color: white;
+			border-color: #A97448; /* Couleur de la bordure en marron */
+		}
+		@media(max-width: 767px) {
+			.card-img-top {
+				height: 300px; /* Ajustez cette valeur selon vos préférences */
+				object-fit: cover;
+			}
+		}
+
+		@media (max-width: 500px) {
+        .image-overlay {
+      position: static; /* Enlever le positionnement absolu */
+      margin-top: 10px; /* Ajouter un espace entre l'image et l'overlay */
+      transform: none; /* Supprimer le transform */
+    }
+
+    }
+	</style>
+
+
+	{% for message in app.flashes('success') %}
+		<div class="text-center alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<section class="first-section">
+		<section class="first-section">
+			<div class="card-img-container">
+
+				<img src="{{ asset('images/slide/top-patisseries.png') }}" class="card-img-top" alt="image du produit" , style="height: 500px " "">
+				<div class="image-overlay">
+					{# <img src="{{ asset('images/lego/picto-cacao.svg') }}" class="logo" alt="logo" style="height: 80px" ;> #}
+					<h3 class="card-title">PÂTISSERIES</h3><br>
+					<p class="card-title">Offrez-vous quelques minutes de pur<br>bonheur
+						<br>
+						en dégustant les grands classiques de la
+						<br>pâtisserie
+						<br>Saveurs & Pappillesrevisite au gré de ses
+						<br>envies,<br>
+						avec les créations originales<br>
+						qui sauront séduire les plus curieux…</p>
+				</div>
+			</div>
+		</section>
+
+	</section>
+
+	<div class="container">
+		<div class="row">
+			{% for product in patisserie %}
+				<div class="col-md-4">
+					<div class="card mb-4" style="border: none;">
+						<a
+							href="{{ path('product_show', {id: product.id}) }}" style="text-decoration: none; color: inherit;">
+							{# <img src="{{ asset('images/produits/' ~ product.image) }}" class="card-img-top" alt="image du produit" style="height: 500px;"> #}
+							<img src="{{ asset('images/produits/' ~ product.image) }}" class="card-img-top product-image-hover" alt="image du produit" style="height: 500px;">
+
+							<div class="card-body" style="background: #F6F6F6;">
+								<h5 class="card-title pt-3">{{ product.title }}</h5>
+								{% set shortDescription = product.descriptionShort|slice(0, 40) %}
+<p class="text-center">{{ shortDescription ~ (product.descriptionShort|length > 40 ? '...' : '') }}</p>
+
+								<p>{{ product.price }}
+									€</p>
+
+								<div class="d-flex flex-wrap justify-content-between">
+							<a href="{{ path('product_show', {id: product.id}) }}" class="btn btn-primary btn-sm btn-block add-to-cart mb-2" onclick="this.classList.add('active')">Voir le produit</a>
+							<a href="{{ path('cart_add', {id: product.id}) }}" class="btn btn-primary btn-sm btn-block add-to-cart" onclick="this.classList.add('active')">Ajouter au panier</a>
+							</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				{% if loop.index % 3 == 0 %}
+				</div>
+				<div class="row">
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

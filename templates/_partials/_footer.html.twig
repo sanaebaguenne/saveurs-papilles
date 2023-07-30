@@ -1,0 +1,99 @@
+<style>
+/* Enlever les traits sous les liens */
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: black; /* Couleur noire pour les liens */
+}
+
+/* Ajouter l'effet de changement de couleur au survol des liens */
+footer ul li a:hover {
+  color: #ad9140;
+}
+
+/* Le style du footer */
+footer.container-fluid {
+  border-top: none;
+}
+
+footer {
+  background-color: #F8F7F5;
+  padding: 50px;
+}
+
+footer h4 {
+  color: #ad9140;
+}
+
+footer ul.social-media {
+  padding: 0;
+}
+
+footer ul.social-media li {
+  display: inline;
+  margin-right: 10px;
+}
+
+footer ul.social-media li a {
+  color: #ad9140;
+  text-decoration: none;
+}
+
+footer ul.social-media li a:hover {
+  color: #fff; /* Vous pouvez changer cette couleur au survol */
+}
+</style>
+
+<footer class="container-fluid bg-dark text-center" style="height: 60px;">
+    <img src="{{ asset('images/footer/fleurs-footer.png') }}" class="d-block w-100" alt="..." style="height: 60px; object-fit: cover;">
+</footer>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ asset('images/logo/saveurspapilles.png') }}" alt="Logo de notre société" style="width:120px;">
+            </div>
+            <div class="col-md-3">
+                <h4>Nos produits</h4>
+                <ul>
+                    <li><a href="#">Chocolats</a></li>
+                    <li><a href="#">Pâtisseries</a></li>
+                    <li><a href="#">Macarons</a></li>
+                    <li><a href="#">Confiseries</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Informations</h4>
+                <ul>
+                    <li><a href="#">Conditions générales de vente</a></li>
+                    <li><a href="#">Protection des données</a></li>
+                    <li><a href="#">Foire aux questions</a></li>
+                    <li><a href="#">Livraison</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Notre société</h4>
+                <ul>
+                    <li><a href="#">La maison Calderon</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Contactez-nous</a></li>
+                </ul>
+                <h4>Suivez-nous :</h4>
+                <ul class="social-media">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

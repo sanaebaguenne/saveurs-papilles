@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="container text-center mb-5">
+        <img src="{{ asset('images/boutique/banniere-admin-membre.jpg') }}" alt="image profil" class="card-img-top"
+            style="object-fit: contain;">
+        <div class="alert alert-info">💬 Vous trouverez ci-dessous le tableau contenant l'ensemble des membres
+        </div>
+
+        {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        <a href="{{ path('app_register') }}" class="btn btn- mt-3" style=" background-color: #A97448; color: #ffff;" >Ajouter un membre</a>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover text-center">
+        <thead class="table-dark">
+            <tr>
+                {% for columnName in columnNames %}
+                    {% if columnName not in ['id', 'password', 'is_verified', 'resetToken'] %}
+                        <th>{{ columnName }}</th>
+                    {% endif %}
+                {% endfor %}
+                <th>Editer</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles | join(' - ') }}</td>
+                    <td>{{ user.pseudo }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.civility }}</td>
+                    <td>{{ user.createdAt | date('d/m/Y à H:i:s') }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.zipcode }}</td>
+                    <td>{{ user.city }}</td>
+                    <td>
+                        <a href="{{ path('app_register_edit', {'id': user.id}) }}" class="btn btn-" style=" color: #A97448;">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_delete_user', {'id': user.id}) }}" class="btn btn-" style=" color: #A97448;">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

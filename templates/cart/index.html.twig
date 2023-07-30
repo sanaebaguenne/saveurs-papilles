@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+<style>
+/* Styles personnalisés pour les boutons du panier */
+.custom-btn {
+  background-color: #A97448;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0.4rem;
+  font-size: 1rem;
+}
+
+/* Styler le bouton "Paiement" */
+.btn-dark {
+  background-color: #A97448;
+  color: white;
+  border-color: #A97448;
+}
+
+/* Styler le lien "Veuillez vous inscrire" */
+.btn-dark a {
+  color: white;
+}
+
+/* Styler le lien "Veuillez vous identifier" */
+.btn-dark a:hover {
+  color: #A97448;
+}
+
+/* Style pour le récapitulatif */
+.recap-container {
+  background-color: #f7f7f7;
+  border: solid 1px rgba(117, 117, 117, 0.3);
+  padding: 20px;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.product-title {
+  font-size: 18px;
+}
+
+.product-quantity {
+  margin-left: auto;
+}
+
+.recap-item {
+  margin-bottom: 10px;
+}
+
+.recap-total {
+  font-weight: bold;
+}
+
+.recap-payment-btn {
+  margin-top: 20px;
+}
+
+</style>
+<div class="container">
+
+  {% for message in app.flashes('success') %}
+  <div class="text-center alert alert-success">
+      {{ message }}
+  </div>
+  {% endfor %}
+  {% for message in app.flashes('warning') %}
+  <div class="text-center alert alert-warning">
+      {{ message }}
+  </div>
+  {% endfor %}
+  {% for message in app.flashes('info') %}
+  <div class="text-center alert alert-info">
+      {{ message }}
+  </div>
+  {% endfor %}
+
+  <div class="row">
+      <div class="col-md-8">
+        {% if not app.user %}
+        <div class="recap-container">
+            <p style="color: #A97448;font-size: 20px; margin-bottom: 0;">Livraison gratuite pour les membres.</p>
+            <p style="color: #757575;">Devenez Membre Saveurs & Papilles pour profiter de livraisons rapides et gratuites. <a
+                    href="{{ path('app_register') }}" style="color: #A97448;">Rejoingnez-nous</a>
+                ou <a href="{{ path('app_login') }}" style="color: #A97448;">S'identifier</a></p>
+        </div>
+        {% endif %}
+        <div class="container-fluid">
+            <h4 class="mt-4">Panier</h4>
+            {% if items %}
+            <div class="product-list">
+                {% for item in items %}
+                <div class="product-item">
+                    <img class="product-image" src="{{ asset('images/produits/' ~ item.product.image) }}" alt="image du produit"  style="width: 150px; height: 150px; object-fit: contain;">
+                    <div class="product-details">
+                        <p class="product-title">{{ item.product.title }}</p>
+                        <p>{{ item.quantity }} produit(s)</p>
+                        {# <div class="product-actions">
+                            <a href="{{ path('cart_decrement', {id : item.product.id }) }}" class="btn btn-sm btn- mb-3 custom-btn"  style="width: 30px; height: 30px;">
+                                <i class="fas fa-minus"></i>
+                            </a>
+                            <a href="{{ path('cart_add', {id : item.product.id }) }}" class="btn btn-sm btn- mb-3 custom-btn"  style="width: 30px; height: 30px;">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <a href="{{ path('cart_remove', {id : item.product.id }) }}" class="btn btn-sm btn-danger mb-3 custom-btn"  style="width: 30px; height: 30px;">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </a>
+                        </div> #}
+                    </div> 
+                    <p> {{ item.product.price * item.quantity }} €</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>Il n'y a aucun article dans votre panier.</p>
+            {% endif %}
+        </div>
+      </div>
+      <div class="col-md-4">
+          <div class="recap-container">
+              <h2 class="mb-4" style="color: #A97448;">Récapitulatif</h2>
+              <div class="recap-item">
+                  <p>Nom: {{ firstName }} {{ lastName }}</p>
+                  <p>Adresse de la livraison: {{ address }} {{codepostal}} {{city}}</p>
+              </div>
+              <h4>Mode de livraison</h4>
+              {% for item in transporters %}
+                  <h5>{{ item.title }}</h5>
+                  <p>{{ item.content }}</p>
+                  {# <p>Prix : {{ item.price }} €</p> #}
+               {% endfor %}
+              <hr> 
+              {# <div class="recap-item">
+                  <div class="row">
+                      <div class="col-md-10">
+                          <p>Sous-total</p>
+                      </div>
+                      <div class="col-md-2">
+                          <p>{{ total }}</p>
+                      </div>
+                  </div>
+              </div> #}
+              <div class="recap-item">
+                  <div class="row">
+                      <div class="col-md-10">
+                          <p>Frais estimés de prise en charge et d'expédition</p>
+                      </div>
+                      <div class="col-md-2">
+                          <p>Gratuit</p>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <div class="recap-item">
+                  <div class="row pt-3">
+                      <div class="col-md-10">
+                          <p>Total</p>
+                      </div>
+                      <div class="col-md-2">
+                          <p>{{ total }} €</p>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              {% if app.user %}
+              <a href="{{ path('stripe_payment') }}" class="btn btn-dark btn-large recap-payment-btn">Paiement</a>
+              {% else %}
+              <p>Veuillez vous <a href="{{ path('app_register') }}" style="color: #A97448;">inscrire</a> ou vous <a href="{{ path('app_login') }}" style="color: #A97448;">identifier</a> afin de pouvoir finaliser votre commande</p>
+              {% endif %}
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

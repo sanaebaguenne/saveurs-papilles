@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Saisissez les informations demandées pour nous rejoindre.{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card mx-auto text-start" style="width: 40rem; border: none; background-color: #f1f1f1; margin-left: auto; margin-right: auto;">
+        <h2 class="mb-5" style="font-size: 28px; color:#A97448; text-align: center;">Saisissez les informations demandées pour nous rejoindre.</h2>
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.pseudo, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.password, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.firstname, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.lastname, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.address, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.zipcode, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.city, {'label_attr': {'class': 'form-label text-center'}}) }}
+        {{ form_row(registrationForm.civility, {'label_attr': {'class': 'form-label text-center'}}) }}
+         {{ form_row(registrationForm.RGPDConsent) }}
+
+        <p class="pt-3" style="color: #333;">Consultez les <a href="#" style="color: #A97448;">Conditions d'utilisation</a> </p>
+
+        <div class="text-center mt-5">
+         
+            <button type="submit" class="btn btn-primary" style="background-color: #A97448; border-color: #A97448;">Continuer</button>
+        </div>
+    </div>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}
+
+
+
+
+

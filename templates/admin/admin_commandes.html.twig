@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="text-center">
+        <img src="{{ asset('images/boutique/banniere-profil1.jpg')}}" alt="image profil" class="card-img-top" style="object-fit: contain;">
+        <div class="alert alert-info">💬 Vous trouverez ci-dessous le tableau contenant l'ensemble des commandes</div>
+
+        {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Commande n°</th>
+                    <th>Membre</th>
+                    <th>Photo</th>
+                    <th>Infos Produit</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                    <th>Supprimer</th>
+                    <th>Editer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commande in orders %}
+                    {% for orderDetail in commande.orderDetails %}
+                        {% set product = orderDetail.product %}
+                        <tr>
+                            {% if loop.index == 1 %}
+                                <td rowspan="{{ commande.orderDetails|length }}">{{ commande.id }}</td>
+                                <td rowspan="{{ commande.orderDetails|length }}">{{ commande.user.id }} / {{ commande.user.email }}</td>
+                            {% endif %}
+                            <td>
+                                <img src="{{ asset('images/produits/' ~ product.image) }}"
+                                    alt="photo du produit"
+                                    style="max-height: 100px; object-fit: contain;">
+                            </td>
+                            <td>{{ product.title }} / {{ product.price }} €</td>
+                            <td>{{ orderDetail.quantity }}</td>
+                            <td>{{ orderDetail.total }} €</td>
+                            {% if loop.index == 1 %}
+                                <td rowspan="{{ commande.orderDetails|length }}">{{ commande.statut }}</td>
+                                <td rowspan="{{ commande.orderDetails|length }}">{{ commande.createdAt | date('d/m/Y') }}</td>
+                                <td rowspan="{{ commande.orderDetails|length }}">
+                                    <a href="{{ path('admin_delete_order', {'id': commande.id}) }}"
+                                        class="btn btn-danger">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                                <td rowspan="{{ commande.orderDetails|length }}">
+                                    <a href="{{ path('admin_edit_commande', {'id': commande.id}) }}"
+                                        class="btn btn-primary">
+                                        Editer
+                                    </a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

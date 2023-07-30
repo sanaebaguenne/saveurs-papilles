@@ -1,0 +1,244 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil {% endblock %}
+
+{% block body %}
+   <style>
+    .card-img-container {
+        position: relative;
+        display: inline-block;
+
+        
+    }
+
+     .card-img-top {
+    width: 100%;
+    height: auto;/* Ajoutez une hauteur fixe pour la card-img-top */
+    background-image: url("{{ asset('images/slide/visuel-banner-page-maison-2.jpg') }}");
+    background-size: cover;
+    background-position: center top; /* Changer cette valeur pour ajuster la position de l'image */
+    object-fit: cover;
+  }
+
+     .image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #d5e6e8;
+    padding: 10px;
+    color: black;
+    z-index: 2;
+    pointer-events: none;
+    font-size: 14px;
+    /* Autres styles pour le texte de l'overlay */
+  }
+
+    .first-section{
+        margin-bottom: 70px;
+    }
+    .second-section{
+          margin-bottom: 120px;
+          
+    }
+    
+
+     
+     .custom-section {
+        max-width: 1000px; /* Changer la largeur selon tes besoins */
+        margin: 0 auto; /* Centrer le contenu horizontalement */
+      }  
+
+     
+
+    .custom-section h3 {
+        font-family: 'Arial', sans-serif; /* Changer la police selon tes préférences */
+        font-size: 24px; /* Changer la taille de la police selon tes préférences */
+        text-align: center;
+    }
+
+    .custom-section p {
+        font-family: 'Arial', sans-serif; /* Changer la police selon tes préférences */
+        font-size: 16px; /* Changer la taille de la police selon tes préférences */
+        text-align: justify;
+    }
+    .logo{
+        height: 60px;
+        border-radius:100px
+    }
+
+    .add-to-cart.active {
+  background-color: #A97448;
+  color: white;
+}
+.add-to-cart {
+  border: 1px solid #A97448;
+  border-radius: 30px;
+  color: #A97448;
+  background-color: white;
+  width: 180px;
+  height: 39px;
+}
+
+/* Style lorsque le bouton est activé (cliqué) */
+.add-to-cart:hover {
+  background-color: #A97448;
+  color: white;
+   border-color: #A97448; /* Couleur de la bordure en marron */
+}
+ h3{
+    text-align:center;
+    
+}
+ /* p{
+    text-align:center;
+    /* padding: 60px; */
+    /* font-size: 16px; */
+/* }  */ 
+.mb-4{
+    padding:  30px;
+}
+
+@media (max-width: 790px) {
+        .image-overlay {
+      position: static; /* Enlever le positionnement absolu */
+      margin-top: 10px; /* Ajouter un espace entre l'image et l'overlay */
+      transform: none; /* Supprimer le transform */
+    }
+
+    }
+   
+</style>
+    
+
+{% for message in app.flashes('success') %}
+<div class="text-center alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
+  {# <section class="first-section">
+         <div class="card-img-container">
+
+            <img src="{{ asset('images/slide/calderon_ile.jpg') }}" class="card-img-top" alt="ile-caldron", style="height: 500px " "">
+            <div class="image-overlay">
+                <img src="{{ asset('images/logo/vanille.jpg') }}" class="logo" alt="logo" style="height: 80px";>
+                  <h1 class="card-title">Saveurs et papilles</h1>
+                <p class="card-title">La Maison Calderon est depuis 2005 <br>
+                   le rendez-vous incontesté des gourmands exigeants. <br>
+                    À sa tête, Christophe Calderon,<br>
+                 un pâtissier-chocolatier passionné et talentueux.<br> 
+                 Tentez l'expérience Calderon, unique et addictive…</p><br>
+
+                 <a href="#" class="btn btn-primary btn-sm add-to-cart" onclick="this.classList.add('active')">Découvrir</a>
+            </div>
+          </div>
+    </section> #}
+
+
+            <section class="first-section">
+         <div class="card-img-container">
+
+            <img src="{{ asset('images/slide/calderon_ile.jpg') }}" class="card-img-top" alt="image du produit", style="widht: 500px">
+            <div class="image-overlay">
+                <img src="{{ asset('images/logo/vanille.jpg') }}" class="logo" alt="logo" ;>
+                
+                  <h1 class="card-title">Saveurs et papilles</h1>
+                <p class="card-title">La Maison Calderon est depuis 2005 <br>
+                   le rendez-vous incontesté des gourmands exigeants. <br>
+                    À sa tête, Christophe Calderon,<br>
+                 un pâtissier-chocolatier passionné et talentueux.<br> 
+                 Tentez l'expérience Calderon, unique et addictive…</p><br>
+
+                 <a href="#" class="btn btn-primary btn-sm add-to-cart" onclick="this.classList.add('active')">Découvrir</a>
+
+
+            </div>
+          </div>
+    </section> 
+
+<acrticle class="second-section custom-section py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="my-4">
+                    <h3>Notre histoire</h3>
+                    <p class="mb-4">
+                        Né dans les marmites du restaurant tropézien de ses parents, Christophe a bien sûr développé le goût de cuisinier, mais plus encore de pâtisser, lui qui passait des heures à observer les gestes précis de la brigade. N’empêche, il hésite avec la piste aux étoiles pour devenir pilote de ligne. Finalement, ni l’un ni l’autre, il suit divers chemins de traverse avant de se rendre à l’évidence et renouer avec ses premières amours.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="my-4">
+                    <h3>La pâtisserie avec un grand</h3>
+                    <p class="mb-4">
+                        À 23 ans, il commence alors son apprentissage en pâtisserie à Saint-Raphaël puis dans la célèbre ENSP (École Nationale Supérieure de Pâtisserie, aujourd’hui École Ducasse) à Yssingeaux. Il y apprend, aux côtés des Meilleurs Ouvriers de France (MOF) la pâtisserie avec un grand P. D’ailleurs, à l’époque, le prestigieux concours des MOF se déroule sur le site, une occasion pour Christophe, de s’émerveiller en coulisses -et d’observer le ballet réglé au cordeau des grands pâtissiers de demain. Les dés sont jetés. L’insatiable envie d’apprendre et de maîtriser le grand art de la pâtisserie ne le quittera plus.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+{# <img src="images/slide/image-du-chef.jpg" class="img-fluid" alt="Image"> #}
+
+<section>
+   
+        <div class="row">
+            <div class="col-md-6">
+                <img src="images/slide/image-du-chef.jpg" class="img-fluid" alt="Image">
+            </div>
+            <div class="col-md-6 d-flex align-items-center" style="background-color: #f8f8f8;">
+                <div class="py-4">
+                    <h3>De la fantaisie à l’orfèvrerie</h3>
+                    <p>
+                        Pour parfaire sa formation, il fait des stages dans de grandes institutions (Lenôtre à Paris, Four Seasons à Fayence, Le Majestic à Cannes). À 30 ans, il décide d’ouvrir sa boutique. Avec Magali, il passe alors de la fantaisie à l’orfèvrerie en transformant la boutique de bijoux de sa bien-aimée en pâtisserie de haut goût ! Le succès est au rendez-vous, les gourmands ne s’y trompent pas et s’y pressent. Une deuxième boutique ouvre en 2012.
+                    </p>
+                </div>
+            </div>
+
+             <div class="row">
+            
+            <div class="col-md-6 d-flex align-items-center" style="background-color: #f8f8f8;">
+                <div class="py-4">
+                    <h3>La quête del’excellence</h3>
+                    <p>
+                        Aujourd’hui, la maison Calderon est membre de la prestigieuse association Relais Desserts.
+                        Christophe poursuit sa quête de l’excellence, et particulièrement celle de l’alliance
+                        parfaite de saveurs et de textures. Cette recherche est son moteur et sa force.
+                        Il propose à sa clientèle des produits de haute qualité, qui font la part belle au goût,
+                        entre tradition et modernité, délicatesse et intensité.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="images/slide/chocolat-fondant.jpg" class="img-fluid" alt="Image">
+            </div>
+        </div>
+
+</section>
+
+<div class="container-fluid mb-5 p-0">
+
+
+
+
+    
+
+
+
+
+
+</div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+
+    <div class="text-center mb-5">
+        <img src="#" alt="image profil" class="card-img-top"
+            style="object-fit: contain;">
+        <div class="alert alert-info">💬 Vous trouverez ci-dessous le tableau contenant l'ensemble des produits de la
+            boutique
+        </div>
+
+        {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+
+        <a href="{{ path('admin_new_transporter') }}" class="btn btn-primary mt-3">Ajouter un transporter</a>
+    </div>
+    <table class="table table-bordered table-striped table-hover text-center">
+        <thead class="table-dark">
+            <tr>
+                {% for data in colonnes %}
+                {% if (data != 'id')  %}
+                <th>{{ data }}</th>
+                {% endif %}
+                {% endfor %}
+                {# <th>Voir</th> #}
+                {# <th>Editer</th> #}
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in transporters %}
+            <tr>
+                <td>{{ data.title }}</td>
+               <td>{{ data.content }}</td>
+                
+               
+                
+                         <td>{{ data.price }} €</td>
+                
+               
+                
+                
+                {# <td><a href="{{ path('product_show', {'id': data.id}) }}" class="btn btn-success"><i
+                            class="fa-solid fa-eye"></i></a></td> #}
+                {# <td><a href="{{ path('admin_edit_transporter', {'id': data.id}) }}" class="btn btn-primary"><i
+                            class="fa-solid fa-pen-to-square"></i></a></td> #}
+                <td><a href="{{ path('admin_delete_transporter', {'id': data.id}) }}" class="btn btn-danger"><i
+                            class="fa-solid fa-trash-can"></i></a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
